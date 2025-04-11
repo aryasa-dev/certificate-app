@@ -57,7 +57,7 @@ export default function App() {
       photoUrl: selectedPhoto,
     });
 
-    const baseUrl = "http://localhost:5173/certificate";
+    const baseUrl = `${window.location.origin}/certificate`
     const fullUrl = `${baseUrl}?${params.toString()}`;
     setFormData((prev) => ({ ...prev, certificateUrl: fullUrl }));
     setPhotoUrl(selectedPhoto);
