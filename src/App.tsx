@@ -1,9 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Certificate from "./pages/Certificate";
-import O2NImage from './assets/WANG101.png'
-import O3NImage from './assets/WANG101Fashion.png'
-import O7NImage from './assets/WANG101.jpg'
 import { ChangeEvent, useState } from "react";
 
 export default function App() {
@@ -36,13 +33,23 @@ export default function App() {
       return;
     }
 
-    // Update photo preview berdasarkan style
-    const styleImageMap: Record<string, string> = {
-      "02N": O2NImage,
-      "03N": O3NImage,
-      "07AN": O7NImage,
-      "07N": O7NImage,
-    };
+    const catalogImages = import.meta.glob(
+      "./assets/catalog-*.{png,jpg,jpeg}",
+      {
+        eager: true,
+        import: "default",
+      }
+    ) as Record<string, string>;
+
+    const styleImageMap: Record<string, string> = {};
+
+    Object.entries(catalogImages).forEach(([path, img]) => {
+      const match = path.match(/catalog-(\d+)\./);
+      if (match) {
+        const num = match[1].padStart(2, "0");
+        styleImageMap[`${num}N`] = img;
+      }
+    });
 
     const selectedPhoto = styleImageMap[style] || "";
 
@@ -57,7 +64,7 @@ export default function App() {
       photoUrl: selectedPhoto,
     });
 
-    const baseUrl = `${window.location.origin}/certificate`
+    const baseUrl = `${window.location.origin}/certificate`;
     const fullUrl = `${baseUrl}?${params.toString()}`;
     setFormData((prev) => ({ ...prev, certificateUrl: fullUrl }));
     setPhotoUrl(selectedPhoto);

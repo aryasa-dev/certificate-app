@@ -94,10 +94,14 @@ export function Form({ formData, onChange }: Props) {
           className="border w-full"
         >
           <option value="">Style</option>
-          <option value="02N">02N</option>
-          <option value="03N">03N</option>
-          <option value="07AN">07AN</option>
-          <option value="07N">07N</option>
+          {Array.from({ length: 29 }, (_, i) => {
+            const value = `${(i + 1).toString().padStart(2, "0")}N`;
+            return (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            );
+          })}
         </select>
       </label>
     </div>
