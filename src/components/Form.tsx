@@ -1,12 +1,18 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, SetStateAction } from "react";
 import { FormProps } from "../types";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 type Props = {
   formData: FormProps;
+  setFormData: (value: SetStateAction<FormProps>) => void;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 };
 
-export function Form({ formData, onChange }: Props) {
+export function Form({ formData, setFormData, onChange }: Props) {
+  console.log(formData.date);
+  const selectedDate = formData.date ? new Date(formData.date) : null;
+
   return (
     <div className="flex flex-col px-4 py-6 gap-2 w-full md:w-1/2">
       <label>
@@ -45,15 +51,30 @@ export function Form({ formData, onChange }: Props) {
         </select>
       </label>
 
-      <label>
+      <label className="flex flex-col">
         Date of Purchase:
-        <input
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date: Date | null) => {
+            if (date) {
+              const isoDate = date.toISOString().split("T")[0];
+              setFormData((prev) => ({ ...prev, date: isoDate }));
+            }
+          }}
+          // onChange={(date: Date) => {
+          //   setFormData((prev) => ({ ...prev, date: isoDate }));
+          // }}
+          dateFormat="yyyy-MM-dd"
+          className="block border w-full px-2 py-1"
+          placeholderText="Select a date"
+        />
+        {/* <input
           type="date"
           name="date"
           value={formData.date}
           onChange={onChange}
           className="border w-full px-2"
-        />
+        /> */}
       </label>
 
       <label>
