@@ -8,7 +8,7 @@ type Props = {
 
 export function Form({ formData, onChange }: Props) {
   return (
-    <div className="flex flex-col px-4 py-6 gap-2 w-1/2">
+    <div className="flex flex-col px-4 py-6 gap-2 w-full md:w-1/2">
       <label>
         Name \ User ID:
         <input

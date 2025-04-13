@@ -63,14 +63,14 @@ export default function Certificate() {
   } = data;
 
   return (
-    <section className="w-screen h-screen overflow-x-hidden py-5">
+    <section className="lg:w-screen overflow-x-hidden py-5">
       <button
         onClick={handleDownload}
         className="bg-blue-500 text-white px-4 py-2 rounded mt-4 mb-10 ml-10"
       >
         Download Sertifikat
       </button>
-      <div id="certificate" className="w-[90rem] h-full mx-auto relative">
+      <div id="certificate" className="w-[375px] md:w-[700px] lg:w-[900px] h-full mx-auto relative">
         <img
           src={CertificateImage}
           alt="certificate"
@@ -79,32 +79,32 @@ export default function Certificate() {
         />
 
         {/* Name */}
-        <div className="absolute top-[245px] left-[29rem] text-2xl">{name}</div>
+        <div className="absolute top-[3.85rem] left-28 md:top-[8rem] md:left-[13rem] lg:top-[10.25rem] lg:left-[17rem] text-xs lg:text-base">{name}</div>
 
         {/* Brand */}
-        <div className="absolute top-[345px] left-[45rem] text-2xl">
+        <div className="absolute top-[5.5rem] left-[11.8rem] md:top-[11.2rem] md:left-[21.5rem] lg:top-[14.25rem] lg:left-[28rem] text-xs lg:text-base">
           {brand}
         </div>
 
         {/* Material */}
-        <div className="absolute top-[430px] left-[46rem] text-2xl">
+        <div className="absolute top-[7rem] left-48 md:top-[13.8rem] md:left-[22.5rem] lg:top-[18rem] lg:left-[29rem] text-xs lg:text-base">
           {material}
         </div>
 
         {/* Certificate URL */}
-        <div className="absolute top-[515px] left-[51rem] text-2xl">
-          <span className="whitespace-nowrap overflow-hidden text-ellipsis block max-w-[430px] h-11">
+        <div className="absolute top-[8.7rem] left-[13.5rem] md:top-[16.7rem] md:left-[25rem] lg:top-[21.5rem] lg:left-[32rem] text-xs lg:text-base">
+          <span className="whitespace-nowrap overflow-hidden text-ellipsis block max-w-[120px] md:max-w-[220px] lg:max-w-[280px] h-11">
             {certificateUrl || ""}
           </span>
         </div>
 
         {/* Serial Number */}
-        <div className="absolute top-[600px] left-[51rem] text-2xl">
+        <div className="absolute top-[10.1rem] left-[13.5rem] md:top-[19.5rem] md:left-[25rem] lg:top-[25rem] lg:left-[32rem] text-xs lg:text-base">
           {style}
         </div>
 
         {/* Photo of Style# */}
-        <div className="absolute top-[380px] left-52 w-[15rem] h-auto">
+        <div className="absolute top-28 lg:top-[15rem] left-11 md:top-[11.25rem] md:left-[4.7rem] lg:left-[6rem] w-16 md:w-[150px] lg:w-[180px] h-auto">
           {photoUrl ? (
             <img
               src={photoUrl}
@@ -115,7 +115,7 @@ export default function Certificate() {
         </div>
 
         {/* Date */}
-        <div className="absolute top-[685px] left-64 text-2xl">{date}</div>
+        <div className="absolute top-[11.5rem] left-12 md:top-[22.25rem] md:left-[7rem] lg:top-[28.5rem] lg:left-36 text-xs lg:text-base">{date}</div>
       </div>
     </section>
   );

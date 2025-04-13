@@ -25,7 +25,7 @@ export default function Home({
       <h1 className="text-xl font-bold">- WANG101 -</h1>
       <p className="mb-4">Certificate Generator</p>
 
-      <div className="flex border border-black divide-x w-[800px]">
+      <div className="flex flex-col md:flex-row border border-black divide-x w-full md:w-[700px] lg:w-[800px]">
         {/* Form */}
         <Form formData={formData} onChange={onChange} />
 
