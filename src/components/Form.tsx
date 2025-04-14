@@ -24,7 +24,7 @@ export function Form({ formData, setFormData, onChange }: Props) {
   });
 
   useEffect(() => {
-    fetch("/data/options.json")
+    fetch("data/options.json")
       .then((res) => res.json())
       .then((data) => {
         setOptions(data);

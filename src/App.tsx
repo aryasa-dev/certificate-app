@@ -64,7 +64,7 @@ export default function App() {
       photoUrl: selectedPhoto,
     });
 
-    const baseUrl = `${window.location.origin}/certificate`;
+    const baseUrl = `${window.location.origin}/CHECKERS/certgenerator/certificate`;
     const fullUrl = `${baseUrl}?${params.toString()}`;
     setFormData((prev) => ({ ...prev, certificateUrl: fullUrl }));
     setPhotoUrl(selectedPhoto);
