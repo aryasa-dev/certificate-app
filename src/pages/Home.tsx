@@ -51,12 +51,12 @@ export default function Home({
     <div className="flex flex-col items-center p-4 text-sm">
       <h1 className="text-xl font-bold">- WANG101 -</h1>
       <p className="mb-4">Certificate Generator</p>
-      <div
-        
-        className="absolute -z-10 opacity-0 pointer-events-none"
-      >
-        <div ref={certificateRef}
-        id="certificate" className="w-[375px] md:w-[700px] lg:w-[900px] h-full mx-auto relative">
+      <div className="absolute -z-10 opacity-0 pointer-events-none">
+        <div
+          ref={certificateRef}
+          id="certificate"
+          className="w-[375px] md:w-[700px] lg:w-[900px] h-full mx-auto relative"
+        >
           <img
             src={CertificateImage}
             alt="certificate"
