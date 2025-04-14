@@ -1,4 +1,4 @@
-import { ChangeEvent, SetStateAction } from "react";
+import { ChangeEvent, SetStateAction, useEffect, useState } from "react";
 import { FormProps } from "../types";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,8 +10,26 @@ type Props = {
 };
 
 export function Form({ formData, setFormData, onChange }: Props) {
-  console.log(formData.date);
   const selectedDate = formData.date ? new Date(formData.date) : null;
+  const [options, setOptions] = useState<{
+    styles: string[];
+    platforms: string[];
+    brands: string[];
+    materials: string[];
+  }>({
+    styles: [],
+    platforms: [],
+    brands: [],
+    materials: [],
+  });
+
+  useEffect(() => {
+    fetch("/data/options.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setOptions(data);
+      });
+  }, []);
 
   return (
     <div className="flex flex-col px-4 py-6 gap-2 w-full md:w-1/2">
@@ -44,10 +62,11 @@ export function Form({ formData, setFormData, onChange }: Props) {
           className="border w-full"
         >
           <option value="">Platform</option>
-          <option value="Tiktok">Tiktok</option>
-          <option value="Shopee">Shopee</option>
-          <option value="Lazada">Lazada</option>
-          <option value="Offline">Offline</option>
+          {options.platforms.map((platform) => (
+            <option key={platform} value={platform}>
+              {platform}
+            </option>
+          ))}
         </select>
       </label>
 
@@ -61,20 +80,10 @@ export function Form({ formData, setFormData, onChange }: Props) {
               setFormData((prev) => ({ ...prev, date: isoDate }));
             }
           }}
-          // onChange={(date: Date) => {
-          //   setFormData((prev) => ({ ...prev, date: isoDate }));
-          // }}
           dateFormat="yyyy-MM-dd"
           className="block border w-full px-2 py-1"
           placeholderText="Select a date"
         />
-        {/* <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={onChange}
-          className="border w-full px-2"
-        /> */}
       </label>
 
       <label>
@@ -86,8 +95,11 @@ export function Form({ formData, setFormData, onChange }: Props) {
           className="border w-full"
         >
           <option value="">Brand</option>
-          <option value="Cellini">Cellini</option>
-          <option value="Checkers">Checkers</option>
+          {options.brands.map((brand) => (
+            <option key={brand} value={brand}>
+              {brand}
+            </option>
+          ))}
         </select>
       </label>
 
@@ -100,9 +112,11 @@ export function Form({ formData, setFormData, onChange }: Props) {
           className="border w-full"
         >
           <option value="">Material</option>
-          <option value="Genuine Leather">Genuine Leather</option>
-          <option value="Full Grain Leather">Full Grain Leather</option>
-          <option value="Synthetic Leather">Synthetic Leather</option>
+          {options.materials.map((material) => (
+            <option key={material} value={material}>
+              {material}
+            </option>
+          ))}
         </select>
       </label>
 
@@ -115,14 +129,11 @@ export function Form({ formData, setFormData, onChange }: Props) {
           className="border w-full"
         >
           <option value="">Style</option>
-          {Array.from({ length: 29 }, (_, i) => {
-            const value = `${(i + 1).toString().padStart(2, "0")}N`;
-            return (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            );
-          })}
+          {options.styles.map((style) => (
+            <option key={style} value={style}>
+              {style}
+            </option>
+          ))}
         </select>
       </label>
     </div>
